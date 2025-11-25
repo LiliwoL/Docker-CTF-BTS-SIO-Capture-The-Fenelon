@@ -50,7 +50,7 @@ INSERT INTO `users` (`username`, `first_name`, `last_name`, `password`, `salary`
 -- Fenelon
 -- Phare du bout du monde en Argentine
 -- ///invinciblement.reformule.ficher
-('fenelon', 'invinciblement', 'reformule', 'ficher', '666'),
+('fenelon', '1.invinciblement', '.reformule', '3.ficher', '666'),
 
 ('jean_luc_picard','Jean-Luc','Picard','maketitso','75000'),
 ('william_ryker','William','Ryker','number1','50000'),
