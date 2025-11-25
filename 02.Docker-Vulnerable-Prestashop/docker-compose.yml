@@ -1,0 +1,38 @@
+
+services:
+
+
+  # Mysql 5.6
+  prestashop-mysql:
+    # Version 5.6
+    image: mysql:5.6
+    container_name: docker-prestashop-mysql
+    networks:
+      - prestashop-net
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    ports:
+      - 3307:3306
+
+   # for ARM
+   #docker run -ti --name docker-prestashop-mysql --network prestashop-net -e MYSQL_ROOT_PASSWORD=admin -p 3307:3306 -d arm64v8/mysql:5.6
+
+  # Container Prestashop
+  prestashop:
+    image: prestashop/prestashop:1.4
+    networks:
+      - prestashop-net
+    environment:
+      DB_SERVER: docker-prestashop-mysql
+      PS_ERASE_DB: 1
+      PS_INSTALL_AUTO: 1
+      PS_LANGUAGE: fr
+      PS_DEMO_MODE: =1
+      ADMIN_MAIL: demo@prestashop.com
+      ADMIN_PASSWD: azerty
+    ports:
+      - 808:80
+
+networks:
+  prestashop-net:
+    driver: bridge
