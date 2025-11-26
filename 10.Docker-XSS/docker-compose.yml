@@ -1,12 +1,29 @@
-version: '3'
+version: '3.8'
+
 services:
+
   web:
-    container_name: xss_vulnerability_challenges
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: ./php
     ports:
-      - 9003:80
+      - "8000:80"
     volumes:
-       - ./src/:/var/www/html/
-    image: moeinfatehi/xss_vulnerability_challenges:latest
+      - ./php:/var/www/html
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: session_demo
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: session_demo
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
