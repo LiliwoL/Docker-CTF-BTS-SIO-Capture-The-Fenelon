@@ -1,7 +1,11 @@
 version: '3'
 
 services:
+  # ------------
+  # Service Web
+  # ------------
   web:
+    container_name: CTF-IDOR-WEB
     build: .
     ports:
       - "5000:5000"
@@ -10,10 +14,18 @@ services:
     volumes:
       - ./app:/app
 
+  # ------------------------
+  # Services Base de données
+  # ------------------------
   database:
+    container_name: CTF-IDOR-DB
     image: mysql:5.7
+    # Chargement du fichier .env pour les identifiants du serveur
     env_file:
       - .env
+    # Volumes utilisés
     volumes:
-      - ./mysql-data:/var/lib/mysql
+      - ./mysql_data:/var/lib/mysql
+      # Script utilisé au premier lancement du service
+      # Création de la structure et des données
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
