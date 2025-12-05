@@ -35,6 +35,11 @@ Cela permet à **n'importe qui d'accéder aux données de n'importe quel utilisa
 - Explorer les différentes notes pour trouver celle contenant des informations sensibles.
 - Utiliser l'ID de l'administrateur pour accéder à la liste complète des utilisateurs.
 
+# Indixes
+
+- Les urls sont utilisées dans le cours
+- Fournir un identifiant de base (alice)
+
 # Solution
 
 - Niveau 1 : `/api/user/8`
