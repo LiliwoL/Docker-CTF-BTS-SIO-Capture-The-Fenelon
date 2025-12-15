@@ -26,6 +26,7 @@ Nom | Difficulté | Description
 [2. Prestashop vulnérable](#2-prestashop-vulnérable) | Débutant | Découvrir l'application utilisée pour le site. Tester (ou se rensigner) pour trouver les répertoires et l'accès back office. BruteForce pour se connecter sur la page d'administration.
 [5. Docker Vulnerable File Server](#5-docker-vulnerable-file-server) | Débutant | Un docker hébergeant des archives vulnérables. Chacune des 3 archives est protégée par un mot de passe. Cependant, les archives sont volontairement faiblement protégées et facilement crackables. Chacune des archives contient un Fenelon.
 [6. Docker Log Machine](#6-docker-log-machine) | Débutant | Une simple machine Linux dans laquelle l'etudiant doit chercher le fenelon dans les logs.
+[9. Docker IDOR] | Débutant | Une application pour démontrer les vulnérabilités IDOR.
 
 ---
 
@@ -49,3 +50,9 @@ Tester la vulnérabilité du serveur SSH et proposer des solutions pour renforce
 Découvrir l'application utilisée pour le site.
 Tester (ou se renseigner) pour trouver les répertoires et l'accès back office.
 BruteForce pour se connecter sur la page d'administration.
+
+---
+
+## 9. Application vulnérable IDOR
+
+Démontrer comment une application est vulénrable avec IDOR
