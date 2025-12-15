@@ -24,6 +24,13 @@ http://localhost:5000/
 - Niveau 2 : Ils doivent ensuite exploiter l'IDOR sur /api/note/{note_id} pour trouver la note secrète et obtenir le FENELON2.
 - Niveau 3 : Enfin, ils doivent exploiter l'IDOR sur /api/admin/users?user_id=4 pour accéder à la liste de tous les utilisateurs et obtenir le FENELON3.
 
+# Temps indicatif
+
+- Promo 2025: 
+	- Niveau 1 résolu en 10 minutes
+	- Niveau 2 résolu en 15 minutes
+	- Niveau 3 résolu en 20 minutes
+
 # Exploitation
 
 La vulnérabilité à trouver est qu'il n'y a **aucune vérification** de l'**authentification**.
@@ -34,6 +41,11 @@ Cela permet à **n'importe qui d'accéder aux données de n'importe quel utilisa
 - Tester différents ID utilisateurs pour trouver l'administrateur.
 - Explorer les différentes notes pour trouver celle contenant des informations sensibles.
 - Utiliser l'ID de l'administrateur pour accéder à la liste complète des utilisateurs.
+
+# Indices
+
+- Les urls sont utilisées dans le cours
+- Fournir un identifiant de base (alice)
 
 # Solution
 
