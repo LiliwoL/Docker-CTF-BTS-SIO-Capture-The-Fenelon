@@ -7,4 +7,4 @@ else
   echo "Destruction des images"
 fi
 
-docker rmi $(docker images 'ctf/01-ctf-openssh-server')
+docker rmi $(docker images 'ctf/01-ctf-vulnerable-ssh-server')

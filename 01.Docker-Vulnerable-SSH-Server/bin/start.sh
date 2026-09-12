@@ -26,10 +26,10 @@ if [ -z "$1" ]
     echo "------------------------------"
     echo "------------------------------"
 		# Commande de lancement (avec lecture du fichier .env)
-    docker-compose --env-file .env up -d
+    docker-compose --env-file .env up -d --build --force-recreate
 else
 	echo "Démarrage du container $@"
   echo "------------------------------"
   echo "------------------------------"
-  docker-compose --env-file .env up $@ -d
+  docker-compose --env-file .env up $@ -d --build --force-recreate
 fi
