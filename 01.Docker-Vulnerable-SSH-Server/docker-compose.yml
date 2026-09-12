@@ -1,8 +1,11 @@
 services:
-  01-ctf-openssh-server:
-    container_name: 01-docker-vulnerable-ssh-server
+  01-ctf-vulnerable-ssh-server:
+    container_name: 01-ctf-vulnerable-ssh-server
     # Nom de l'image
-    image: ctf/01-ctf-openssh-server
+    image: ctf/01-ctf-vulnerable-ssh-server
+    # Charge les variables directement dans le conteneur
+    env_file:
+      - .env
     build:
       # Utilisation du Dockerfile présent dans le dossier
       context: ./

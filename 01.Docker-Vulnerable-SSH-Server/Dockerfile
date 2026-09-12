@@ -1,6 +1,6 @@
 # Choose the right Debian tag
 # https://hub.docker.com/_/debian/tags
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 
 # Récupération des variables
 ARG FENELON_1
@@ -18,7 +18,7 @@ ARG PASSWORD_3
 
 
 # Commandes d'installation de base
-RUN apt update && apt install openssh-server locales vim zsh iproute2 sudo -y
+RUN apt update && apt install openssh-server locales vim zsh iproute2 sudo rsyslog -y
 RUN locale-gen fr_FR.UTF-8
 RUN update-locale
 
