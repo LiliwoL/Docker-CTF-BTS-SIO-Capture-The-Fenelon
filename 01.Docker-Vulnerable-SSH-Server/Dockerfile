@@ -70,18 +70,19 @@ RUN echo "${FENELON_3}" > /home/${USER_3}/fenelon.txt
 
 # Configuration du serveur SSH pour activer les logs
 # --------------------------------------------------
-RUN sed -i -e 's/^[#[:space:]]*SyslogFacility[[:space:]]\+AUTH/SyslogFacility AUTH/' \
+RUN sed -i -e 's/^[#[:space:]]*SyslogFacility[[:space:]]\+AUTH/SyslogFacility AUTHPRIV/' \
            -e 's/^[#[:space:]]*LogLevel[[:space:]]\+INFO/LogLevel INFO/' \
            /etc/ssh/sshd_config
 
 
-# Ensure the logger is running (rsyslog) and sshd starts in the foreground
-RUN mkdir -p /var/run/sshd && \
-    systemctl enable rsyslog.service && \
-    systemctl enable ssh.service
+# 1. Copy the script into the container
+COPY entrypoint.sh /app/entrypoint.sh
 
+# 2. Make it executable
+RUN chmod +x /app/entrypoint.sh
+
+# 3. Use the absolute path in the ENTRYPOINT
+ENTRYPOINT ["/app/entrypoint.sh"]
 
 # Port 22 (qui sera différent via docker-compose)
 EXPOSE 22
-
-CMD ["/usr/sbin/sshd","-D"]
