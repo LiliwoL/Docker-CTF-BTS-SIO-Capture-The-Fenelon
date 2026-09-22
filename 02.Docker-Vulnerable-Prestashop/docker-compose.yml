@@ -1,16 +1,16 @@
 
 services:
-
-
   # Mysql 5.6
   prestashop-mysql:
     # Version 5.6
     image: mysql:5.6
-    container_name: docker-prestashop-mysql
+    env_file:
+      - .env
+    container_name: 02-ctf-vulnerable-prestashop-mysql
     networks:
       - prestashop-net
     environment:
-      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - 3307:3306
 
@@ -19,17 +19,26 @@ services:
 
   # Container Prestashop
   prestashop:
-    image: prestashop/prestashop:1.4
+    image: prestashop/prestashop:1.5
+    # Charge les variables directement dans le conteneur
+    env_file:
+      - .env
+    container_name: 02-ctf-vulnerable-prestashop
     networks:
       - prestashop-net
     environment:
-      DB_SERVER: docker-prestashop-mysql
+      DB_SERVER: 02-ctf-vulnerable-prestashop-mysql
+      # Drop the mysql database. All previous mysql data will be lost
       PS_ERASE_DB: 1
+      # Create the mysql database.
+      PS_INSTALL_DB: 1
       PS_INSTALL_AUTO: 1
-      PS_LANGUAGE: fr
-      PS_DEMO_MODE: =1
+      #PS_LANGUAGE: fr
+      PS_COUNTRY: FR
+      PS_DEMO_MODE: 1
+
       ADMIN_MAIL: demo@prestashop.com
-      ADMIN_PASSWD: azerty
+      ADMIN_PASSWD: ${ADMIN_PASSWD}
     ports:
       - 808:80
 

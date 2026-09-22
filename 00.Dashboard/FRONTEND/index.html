@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SSH Logs Live</title>
+  <style>
+    body { font-family: ui-monospace, Menlo, Consolas, monospace;
+           margin: 0; background: #0b0f14; color: #d8dee9; }
+    header { padding: 12px 16px; background: #111827;
+             position: sticky; top: 0; border-bottom: 1px solid #1f2937; }
+    #log { padding: 16px; white-space: pre-wrap; }
+    .line { line-height: 1.35; }
+    .faint { color: #9ca3af; }
+    .err   { color: #f87171; }
+  </style>
+</head>
+<body>
+  <header>🔌 SSH Logs — temps réel</header>
+  <div id="log"></div>
+
+  <script>
+    const logEl = document.getElementById('log');
+    const MAX_LINES = 300;
+
+    function render(lines, append = true) {
+      if (!append) logEl.innerHTML = '';
+      for (const line of lines) {
+        const div = document.createElement('div');
+        div.className = 'line';
+        div.textContent = line;
+        logEl.appendChild(div);
+      }
+      // Limite le buffer DOM
+      while (logEl.childNodes.length > MAX_LINES)
+        logEl.removeChild(logEl.firstChild);
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function connect() {
+      const host = "172.16.0.90";
+      const proto = location.protocol === 'https:' ? 'wss' : 'ws';
+      const ws = new WebSocket(`${proto}://${host}/ws`);
+
+      ws.onopen = () => {
+        const d = document.createElement('div');
+        d.className = 'line faint';
+        d.textContent = '【connecté】';
+        logEl.appendChild(d);
+      };
+
+      ws.onmessage = (ev) => {
+        const msg = JSON.parse(ev.data);
+        if (msg.type === 'snapshot') render(msg.lines, false);
+        else if (msg.type === 'append') render(msg.lines, true);
+        else if (msg.type === 'error') {
+          const d = document.createElement('div');
+          d.className = 'line err';
+          d.textContent = 'ERREUR: ' + msg.message;
+          logEl.appendChild(d);
+        }
+      };
+
+      ws.onclose = () => {
+        const d = document.createElement('div');
+        d.className = 'line faint';
+        d.textContent = '【déconnecté — retry dans 1s】';
+        logEl.appendChild(d);
+        setTimeout(connect, 1000); // auto-reconnect
+      };
+    }
+
+    connect();
+  </script>
+</body>
+</html>   

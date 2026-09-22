@@ -1,0 +1,5 @@
+services:
+  minimaliste:
+    image: anssi/fcsc2026-web-minimaliste:latest
+    ports:
+      - "8000:8000"

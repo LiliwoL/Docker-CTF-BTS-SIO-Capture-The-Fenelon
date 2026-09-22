@@ -35,7 +35,7 @@ MySQL:
 
 ## Utilisation en cours
 
-* Scanner de vulnarabilités
+* Scanner de vulnérabilités
 * Scan des répertoires
 * BruteForce
 * Détection des versions

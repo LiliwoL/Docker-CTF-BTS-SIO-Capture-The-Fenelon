@@ -1,0 +1,41 @@
+services:
+  dvwa:
+    image: vulnerables/web-dvwa
+    container_name: 00-ctf-dvwa-web
+    ports:
+      - "80:80"
+    volumes:
+      # Configuration de DVWA
+      - ./config/config.inc.php:/var/www/html/config/config.inc.php      
+    networks:
+      - dvwa_stack
+    restart: always
+    # DVWA logs
+    # docker compose
+
+  mariadb:
+    image: mariadb:10.7
+    container_name: 00-ctf-dvwa-mariadb
+
+    # https://mariadb.com/docs/server/server-management/automated-mariadb-deployment-and-administration/docker-and-mariadb/mariadb-server-docker-official-image-environment-variables
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?error}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:?error}
+      MYSQL_USER: ${MYSQL_USER:?error}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?error}
+    ports:
+      - "3306:3306"
+    networks:
+      - dvwa_stack
+    restart: always
+
+  adminer:
+    container_name: 00-ctf-dvwa-adminer
+    image: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - dvwa_stack
+networks:
+  dvwa_stack:
+    driver: bridge
