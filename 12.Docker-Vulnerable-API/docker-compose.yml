@@ -1,0 +1,9 @@
+services:
+  12-ctf-vulnerable-api:
+    image: erev0s/vampi:latest
+    container_name: 12-ctf-vulnerable-api
+    ports:
+      - "5000:5000"
+    # Charge les variables directement dans le conteneur
+    env_file:
+      - .env
