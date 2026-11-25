@@ -1,6 +1,6 @@
 <?php
-require 'session.php';
-open_session();
+    require 'session.php';
+    open_session();
 ?>
 
 <!DOCTYPE html>

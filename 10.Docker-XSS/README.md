@@ -1,13 +1,18 @@
 # XSS
 
 
+# Ports utilisés
+
+MySQL: 3306
+Web: 8008
+
 # Lancement
 
 docker-compose up -d
 
 # Accès
 
-http://localhost:8000
+http://localhost:8008
 
 # Identifiants
 

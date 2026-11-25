@@ -21,7 +21,7 @@ if (!isset($_SESSION['user_id'])) {
 
         <p>Votre cookie de session: <code><?= htmlspecialchars(session_id()) ?></code></p>
 
-        <p>Votre cookie de username (si il est encore valide): <code><?= htmlspecialchars($_COOKIE['user_name'])
+        <p>Votre cookie de username (si il est encore valide, durée de vie de 60 secondes): <code><?= htmlspecialchars($_COOKIE['user_name'])
                 ?></code></p>
 
         <p><a href="connected_users.php">Voir les utilisateurs connectés</a></p>
