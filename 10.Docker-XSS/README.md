@@ -17,6 +17,8 @@ http://localhost:8008
 # Identifiants
 
 admin / password
+etudiant1 / password
+etudiantX / password
 
 # Page vulnérable
 
